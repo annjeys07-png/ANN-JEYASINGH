@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ann Jeyasingh — Portfolio Wrapped</title>
+<meta name="description" content="Ann Jeyasingh, first-year B.Tech IT student. Apps and websites in English and Tamil, told as a set of story cards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Noto+Sans+Tamil:wght@500;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0E3B2E; --sun:#F6C945; --coral:#FF6B4A; --ink:#15120E; --cream:#F5ECDD;
+  --ease:cubic-bezier(.22,.85,.25,1); --pad:6vw;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--ink)}
+body{font-family:'Bricolage Grotesque','Noto Sans Tamil',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.4;color:var(--cream);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+.ta{font-family:'Noto Sans Tamil','Bricolage Grotesque',sans-serif}
+
+/* stage */
+#stage{position:fixed;inset:0;height:100dvh;overflow:hidden;background:var(--bg,var(--green));color:var(--fg,var(--cream));transition:background .5s var(--ease)}
+.slide{position:absolute;inset:0;background:var(--bg);color:var(--fg);transition:transform .8s var(--ease),opacity .6s var(--ease)}
+.slide.future{transform:translateY(100%)}
+.slide.past{transform:translateY(-7%);opacity:0}
+.slide.on{transform:none;opacity:1}
+.in{height:100%;overflow-y:auto;padding:max(64px,calc(env(safe-area-inset-top) + 56px)) var(--pad) 118px;display:flex;flex-direction:column;max-width:1200px;margin:0 auto;scrollbar-width:none}
+.in::-webkit-scrollbar{display:none}
+.slide:nth-child(1){--bg:var(--green);--fg:var(--cream);--rb:var(--sun);--rf:var(--ink)}
+.slide:nth-child(2){--bg:var(--sun);--fg:var(--ink);--rb:var(--ink);--rf:var(--sun)}
+.slide:nth-child(3){--bg:var(--coral);--fg:var(--ink);--rb:var(--cream);--rf:var(--ink)}
+.slide:nth-child(4){--bg:var(--ink);--fg:var(--cream);--rb:var(--sun);--rf:var(--ink)}
+.slide:nth-child(5){--bg:var(--cream);--fg:var(--ink);--rb:var(--coral);--rf:var(--ink)}
+.slide:nth-child(6){--bg:var(--green);--fg:var(--cream);--rb:var(--coral);--rf:var(--ink)}
+.slide:nth-child(7){--bg:var(--sun);--fg:var(--ink);--rb:var(--green);--rf:var(--sun)}
+
+/* entrance */
+.u{opacity:0;transform:translateY(36px);transition:opacity .7s var(--ease),transform .8s var(--ease)}
+.live .slide.on .u{opacity:1;transform:none;transition-delay:calc(.25s + var(--i,0)*.09s)}
+
+/* type */
+.kick{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;display:flex;gap:10px;align-items:center}
+.kick::before{content:"";width:26px;height:3px;background:currentColor}
+h2{font-weight:800;font-size:clamp(46px,13vw,150px);line-height:.88;letter-spacing:-.045em;margin-bottom:3vh}
+.lead{font-weight:800;font-size:clamp(26px,5.4vw,56px);line-height:1;letter-spacing:-.035em;margin-bottom:18px}
+.txt p{max-width:36em;margin-bottom:.8em;font-size:clamp(15px,1.5vw,19px)}
+.fit{margin:auto 0}
+
+/* 1 landing */
+h1{font-weight:800;font-size:min(17.5vw,21vh,200px);line-height:.84;letter-spacing:-.06em;margin:auto 0 0 -.03em}
+h1 span{display:block}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.badge{width:clamp(78px,20vw,132px);aspect-ratio:1;transform:rotate(-9deg);transition:transform .6s var(--ease)}
+.badge:hover{transform:rotate(6deg) scale(1.06)}
+.badge svg{width:100%;height:100%;display:block}
+.spin .badge{animation:spin 1s var(--ease)}
+@keyframes spin{to{transform:rotate(351deg)}}
+.tag{font-weight:800;font-size:clamp(20px,3vw,34px);line-height:1.02;letter-spacing:-.03em;max-width:17em;margin-top:2.4vh}
+.now{margin-top:12px;font-size:15px;max-width:30em}
+.now b{color:var(--sun);font-weight:800}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:13px 22px;border-radius:999px;font-weight:800;font-size:15px;text-decoration:none;background:var(--sun);color:var(--ink);border:3px solid var(--sun);transition:transform .35s var(--ease),background .3s,color .3s}
+.btn.o{background:transparent;color:inherit;border-color:currentColor}
+.btn:hover{transform:translateY(-3px) rotate(-1.5deg)}
+.btn.o:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.btn svg{width:16px;height:16px;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+
+/* 3 skills */
+.rank{list-style:none;counter-reset:r}
+.rank li{counter-increment:r;display:flex;align-items:baseline;gap:12px;border-top:2px solid var(--ink);padding:8px 0;font-weight:800;font-size:clamp(18px,3vw,32px);letter-spacing:-.025em;line-height:1.1}
+.rank li::before{content:counter(r);font-size:13px;width:18px;flex:none}
+.rank li span{margin-left:auto;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:99px;border:2px solid var(--ink);white-space:nowrap;text-align:right}
+.rank .c span{background:var(--ink);color:var(--coral)}
+.rank .g span{background:var(--cream)}
+
+/* 4,5 cards */
+.item{border-top:2px solid currentColor;padding:12px 0 16px}
+.item h3{font-weight:800;font-size:clamp(30px,6.5vw,72px);line-height:.92;letter-spacing:-.04em;margin-bottom:6px}
+.item p{max-width:32em;font-size:clamp(14px,1.4vw,18px);opacity:.88}
+.item small{display:block;margin-top:8px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--sun)}
+.slide:nth-child(5) .item small{color:var(--coral)}
+.cols{display:grid;gap:0 28px}
+.big{font-weight:800;font-size:clamp(40px,10vw,128px);line-height:.88;letter-spacing:-.05em;margin-bottom:3vh}
+.big em{font-style:normal;color:var(--sun)}
+.facts{list-style:none}
+.facts li{display:grid;grid-template-columns:42px 1fr;border-top:2px solid currentColor;padding:11px 0 13px;font-size:clamp(15px,1.5vw,19px)}
+.facts b{font-weight:800}
+
+/* contact */
+.mail{display:block;font-weight:800;font-size:clamp(34px,9.5vw,130px);line-height:.88;letter-spacing:-.055em;text-decoration:none;overflow-wrap:anywhere;margin-bottom:3vh}
+.mail:hover{text-decoration:underline;text-decoration-thickness:.07em;text-underline-offset:.1em}
+.btn.dk{background:var(--ink);border-color:var(--ink);color:var(--sun)}
+
+/* progress segments */
+#seg{position:fixed;top:max(12px,env(safe-area-inset-top));left:var(--pad);right:var(--pad);display:flex;gap:5px;z-index:30;max-width:1200px;margin:0 auto}
+#seg button{flex:1;height:22px;position:relative}
+#seg button::before,#seg button::after{content:"";position:absolute;left:0;right:0;top:9px;height:4px;border-radius:4px;background:var(--fg)}
+#seg button::before{opacity:.28}
+#seg button::after{transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+#seg button.d::after{transform:none}
+#stage{--fg:var(--cream)}
+#seg,#nav,#count{color:var(--fg)}
+
+/* ribbon — signature */
+#rib{position:fixed;left:-6%;width:112%;bottom:max(14px,env(safe-area-inset-bottom));transform:rotate(-2.2deg);background:var(--rb,var(--sun));color:var(--rf,var(--ink));border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);overflow:hidden;z-index:30;transition:background .5s var(--ease),color .5s var(--ease);pointer-events:auto}
+#rib div{display:flex;width:max-content;animation:run 38s linear infinite}
+#rib:hover div{animation-play-state:paused}
+.rev #rib div{animation-direction:reverse;animation-duration:7s}
+#rib span{display:flex;align-items:center;gap:18px;padding:9px 0 10px 18px;font-weight:800;font-size:17px;text-transform:uppercase;letter-spacing:-.01em;white-space:nowrap}
+#rib svg{width:15px;height:15px;flex:none}
+@keyframes run{to{transform:translateX(-50%)}}
+
+#nav{position:fixed;right:var(--pad);bottom:max(78px,calc(env(safe-area-inset-bottom) + 66px));display:flex;gap:8px;align-items:center;z-index:30}
+#nav button{width:46px;height:46px;border-radius:50%;border:2.5px solid currentColor;display:grid;place-items:center;transition:transform .3s var(--ease),opacity .3s,background .3s,color .3s}
+#nav button:hover{background:var(--fg);color:var(--bg)}
+#nav button:disabled{opacity:.25;pointer-events:none}
+#nav svg{width:18px;height:18px}
+#count{position:fixed;left:var(--pad);bottom:max(86px,calc(env(safe-area-inset-bottom) + 74px));z-index:30;font-weight:800;font-size:13px;letter-spacing:.1em}
+#toast{position:fixed;left:50%;top:max(46px,calc(env(safe-area-inset-top) + 40px));transform:translate(-50%,-200%);background:var(--ink);color:var(--sun);padding:11px 16px;border-radius:14px;font-weight:800;font-size:14px;line-height:1.2;z-index:60;width:max-content;max-width:88vw;text-align:center;transition:transform .6s var(--ease)}
+#toast.on{transform:translate(-50%,0)}
+
+/* shutter opening */
+#shut{position:fixed;inset:0;z-index:100;pointer-events:auto}
+.pn{position:absolute;top:0;bottom:0;width:50%;background:var(--green);overflow:hidden;transition:transform 1s cubic-bezier(.76,0,.24,1)}
+.pn.l{left:0;border-right:4px solid var(--sun)}
+.pn.r{right:0}
+.pn div{position:absolute;top:0;bottom:0;width:100vw;display:flex;align-items:center;justify-content:center;color:var(--cream);text-align:center;font-weight:800;font-size:min(15vw,130px);line-height:.86;letter-spacing:-.055em}
+.pn.l div{left:0}.pn.r div{right:0}
+.pn small{display:block;font-size:min(3.4vw,15px);letter-spacing:.14em;text-transform:uppercase;margin-top:18px;color:var(--sun)}
+#shut.go .l{transform:translateX(-101%)}
+#shut.go .r{transform:translateX(101%)}
+#skip{position:fixed;z-index:101;top:max(14px,env(safe-area-inset-top));right:var(--pad);background:var(--sun);color:var(--ink);font-weight:800;font-size:13px;padding:9px 16px;border-radius:99px;letter-spacing:.04em}
+.done #shut,.done #skip{display:none}
+
+@media(min-width:820px){
+  :root{--pad:5vw}
+  .cols{grid-template-columns:1fr 1fr}
+  .cols.three{grid-template-columns:repeat(3,1fr)}
+  .split{display:grid;grid-template-columns:1.1fr 1fr;gap:6vw;align-items:end;margin:auto 0}
+  #rib span{font-size:19px}
+}
+@media(max-height:620px){h1{font-size:min(17vw,17vh)}.item{padding:8px 0 10px}}
+@media(prefers-reduced-motion:reduce){
+  .slide,.u,#stage,.pn,#seg button::after{transition-duration:.01s!important;transition-delay:0s!important}
+  .u{transform:none}
+  #rib div{animation:none}
+  .spin .badge{animation:none}
+}
+</style>
+</head>
+<body>
+<div id="stage" class="">
+  <div id="seg" role="tablist" aria-label="Story progress"></div>
+
+  <!-- 1 landing -->
+  <section class="slide" aria-label="Intro"><div class="in">
+    <div class="top">
+      <p class="kick u" style="--i:0">Portfolio Wrapped / 2026</p>
+      <button class="badge u" id="badge" style="--i:1" aria-label="Monogram AJ">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="#F6C945" d="M50 2l9 8 12-3 6 11 12 2 1 12 10 7-5 11 5 11-10 7-1 12-12 2-6 11-12-3-9 8-9-8-12 3-6-11-12-2-1-12-10-7 5-11-5-11 10-7 1-12 12-2 6-11 12 3z"/><text x="50" y="63" text-anchor="middle" font-family="Bricolage Grotesque,Helvetica,sans-serif" font-weight="800" font-size="40" letter-spacing="-3" fill="#15120E">AJ</text></svg>
+      </button>
+    </div>
+    <h1 aria-label="Ann Jeyasingh"><span class="u" style="--i:2">Ann</span><span class="u" style="--i:3">Jeyasingh</span></h1>
+    <p class="tag u" style="--i:4">I build apps and websites in two languages, and I write poems in both.</p>
+    <p class="now u" style="--i:5"><b>Currently</b> building LocoShare and learning how to get an app onto the Play Store.</p>
+    <div class="btns u" style="--i:6">
+      <a class="btn" href="#" data-go="1">Explore <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M3 10h13M11 4l6 6-6 6"/></svg></a>
+      <a class="btn o" href="#" data-go="6">Say hi</a>
+    </div>
+  </div></section>
+
+  <!-- 2 about -->
+  <section class="slide" aria-label="About"><div class="in">
+    <div class="fit">
+      <p class="kick u" style="--i:0">01 &nbsp;About</p>
+      <p class="lead u ta" style="--i:1">வணக்கம். I'm Ann, a first-year B.Tech IT student from Valliyur.</p>
+      <div class="txt u" style="--i:2">
+        <p>Most days I'm at Mariya Cars Valliyur, the used car dealership I run. We buy, sell, exchange, arrange finance and renew insurance on the spot. It taught me that people trust you when things are clear and quick, and I try to build software the same way.</p>
+        <p>I study IT so I can make the tools myself. So far that's two Flutter apps, a bilingual website for the dealership, and many evenings working out why something won't run on a real phone. I write too, in English and Tamil. Code and poems are closer than they look: both say something with as little as possible.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- 3 skills -->
+  <section class="slide" aria-label="Skills"><div class="in">
+    <div class="fit">
+      <p class="kick u" style="--i:0">02 &nbsp;Skills</p>
+      <h2 class="u" style="--i:1">Where I stand.</h2>
+      <ol class="rank u" style="--i:2">
+        <li class="c">Flutter and Dart <span>Comfortable</span></li>
+        <li class="c">HTML and CSS <span>Comfortable</span></li>
+        <li class="c">Writing, English and Tamil <span>Comfortable</span></li>
+        <li class="g">Firebase <span>Getting comfortable</span></li>
+        <li class="g">JavaScript <span>Getting comfortable</span></li>
+        <li>Google Maps in apps <span>Learning</span></li>
+        <li>Play Store publishing <span>Learning</span></li>
+      </ol>
+    </div>
+  </div></section>
+
+  <!-- 4 made -->
+  <section class="slide" aria-label="Made"><div class="in">
+    <div class="fit">
+      <p class="kick u" style="--i:0">03 &nbsp;What I've made</p>
+      <h2 class="u" style="--i:1">Three builds.</h2>
+      <div class="cols three">
+        <div class="item u" style="--i:2"><h3>LocoShare</h3><p>A location-sharing app where nobody is tracked without saying yes. Real-time maps, phone OTP sign-in.</p><small>Flutter / Firebase / Maps</small></div>
+        <div class="item u" style="--i:3"><h3>MyFlow</h3><p>A productivity app with six screens, Material 3 and a clean structure underneath so it can keep growing.</p><small>Flutter / Material 3</small></div>
+        <div class="item u" style="--i:4"><h3>Mariya Cars</h3><p>A bilingual website for the dealership, so customers find us in the language they think in.</p><small>HTML / CSS / JS</small></div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- 5 next -->
+  <section class="slide" aria-label="Learning and next"><div class="in">
+    <div class="fit">
+      <p class="kick u" style="--i:0">04 &nbsp;What's next</p>
+      <h2 class="u" style="--i:1">Learning, then building.</h2>
+      <div class="cols three">
+        <div class="item u" style="--i:2"><small style="margin:0 0 8px">Learning</small><h3>Shipping</h3><p>Getting a build from my laptop to real Android phones, then through the Play Store.</p></div>
+        <div class="item u" style="--i:3"><small style="margin:0 0 8px">Want to build</small><h3>Small-town tools</h3><p>Apps for the shops around me, so simple that people really leave the notebook behind.</p></div>
+        <div class="item u" style="--i:4"><small style="margin:0 0 8px">Want to build</small><h3>Tamil first</h3><p>An app whose first language is Tamil, not a translation added at the end.</p></div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- 6 beyond -->
+  <section class="slide" aria-label="Beyond code"><div class="in">
+    <div class="fit split" style="display:block">
+      <p class="kick u" style="--i:0">05 &nbsp;Beyond code</p>
+      <p class="big u" style="--i:1">Poems in <em>Tamil</em> and English.</p>
+      <ul class="facts u" style="--i:2">
+        <li><b>01</b><span>I wrote a short, nostalgic poem about my school friends. It's the one I'd save first.</span></li>
+        <li><b>02</b><span>Probably the only first-year IT student who renews car insurance between lectures.</span></li>
+        <li><b>03</b><span>I think in two languages, so I design in two as well.</span></li>
+      </ul>
+    </div>
+  </div></section>
+
+  <!-- 7 contact -->
+  <section class="slide" aria-label="Contact"><div class="in">
+    <div class="fit">
+      <p class="kick u" style="--i:0">06 &nbsp;Contact</p>
+      <h2 class="u" style="--i:1">Say hi.</h2>
+      <!-- EDIT: put your real email, LinkedIn and GitHub below -->
+      <a class="mail u" style="--i:2" href="mailto:your.name@example.com">your.name<br>@example.com</a>
+      <div class="btns u" style="--i:3">
+        <a class="btn dk" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn dk" href="https://github.com/your-handle" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn o" href="#" data-go="0">Play again</a>
+      </div>
+      <p class="ta u" style="--i:4;margin-top:22px;font-weight:800;font-size:18px">நன்றி.</p>
+    </div>
+  </div></section>
+
+  <div id="rib" aria-hidden="true"><div id="track"></div></div>
+  <div id="count" aria-hidden="true"></div>
+  <div id="nav">
+    <button id="prev" aria-label="Previous card"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M17 10H4M9 4l-6 6 6 6"/></svg></button>
+    <button id="next" aria-label="Next card"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M3 10h13M11 4l6 6-6 6"/></svg></button>
+  </div>
+  <div id="toast" role="status"></div>
+</div>
+
+<div id="shut" aria-hidden="true">
+  <div class="pn l"><div>Ann<br>Jeyasingh<small>Portfolio Wrapped 2026</small></div></div>
+  <div class="pn r"><div>Ann<br>Jeyasingh<small>Portfolio Wrapped 2026</small></div></div>
+</div>
+<button id="skip" type="button">Skip</button>
+
+<script>
+(function(){
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stage=document.getElementById('stage'), slides=[].slice.call(document.querySelectorAll('.slide')), n=slides.length, cur=0;
+  var segBox=document.getElementById('seg'), count=document.getElementById('count'), prev=document.getElementById('prev'), next=document.getElementById('next');
+
+  /* ribbon: things I love */
+  var loves=['Tamil poems','English poems','Flutter','Firebase','Bilingual websites','School-friend memories','Late-night debugging','Shipping apps','Clean architecture'];
+  var star='<svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.8 5.6 3.4 9.2 10 10-6.6.8-9.2 4.4-10 10-.8-5.6-3.4-9.2-10-10 6.600-.8 9.200-4.400 10-10z"/></svg>';
+  var set='<span>'+loves.map(function(t){return t+' '+star;}).join('</span><span>')+'</span>', html='';
+  for(var i=0;i<6;i++) html+=set.replace(/<\/span><span>/g,'</span><span>');
+  document.getElementById('track').innerHTML=html;
+
+  /* segments */
+  var segs=[];
+  slides.forEach(function(s,i){ var b=document.createElement('button'); b.setAttribute('aria-label','Card '+(i+1)); b.addEventListener('click',function(e){e.stopPropagation();go(i);}); segBox.appendChild(b); segs.push(b); });
+
+  function pad(x){return (x<10?'0':'')+x;}
+  function go(i){
+    if(i<0||i>=n||i===cur&&stage.dataset.init)return; cur=i; stage.dataset.init=1;
+    slides.forEach(function(s,k){
+      s.classList.toggle('on',k===cur); s.classList.toggle('past',k<cur); s.classList.toggle('future',k>cur);
+      if(k===cur){s.removeAttribute('inert');s.removeAttribute('aria-hidden');var sc=s.querySelector('.in');if(sc)sc.scrollTop=0;} else {s.setAttribute('inert','');s.setAttribute('aria-hidden','true');}
+    });
+    segs.forEach(function(b,k){ b.classList.toggle('d',k<=cur); });
+    var cs=getComputedStyle(slides[cur]);
+    ['--bg','--fg','--rb','--rf'].forEach(function(v){ stage.style.setProperty(v,cs.getPropertyValue(v)); });
+    count.textContent=pad(cur+1)+' / '+pad(n);
+    prev.disabled=cur===0; next.disabled=cur===n-1;
+  }
+  go(0);
+
+  /* navigation: tap, keys, swipe, wheel */
+  stage.addEventListener('click',function(e){
+    if(e.target.closest('a,button,#seg'))return;
+    if(e.clientX<innerWidth*.3) go(cur-1); else go(cur+1);
+  });
+  document.querySelectorAll('[data-go]').forEach(function(a){ a.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();go(+a.dataset.go);}); });
+  prev.addEventListener('click',function(e){e.stopPropagation();go(cur-1);});
+  next.addEventListener('click',function(e){e.stopPropagation();go(cur+1);});
+  addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'||(e.key===' '&&!e.target.closest('a,button'))){e.preventDefault();go(cur+1);}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
+    else if(e.key==='w'||e.key==='W'){egg();}
+  });
+  var ty=null; stage.addEventListener('touchstart',function(e){ty=e.touches[0].clientY;},{passive:true});
+  stage.addEventListener('touchend',function(e){ if(ty===null)return; var d=e.changedTouches[0].clientY-ty; ty=null; if(Math.abs(d)>60) go(cur+(d<0?1:-1)); },{passive:true});
+  var wl=0; stage.addEventListener('wheel',function(e){
+    var sc=e.target.closest('.in'); if(sc&&sc.scrollHeight>sc.clientHeight+4)return;
+    var t=Date.now(); if(t-wl<800||Math.abs(e.deltaY)<20)return; wl=t; go(cur+(e.deltaY>0?1:-1));
+  },{passive:true});
+
+  /* hidden: tap the badge three times (or press W) for the Wrapped stats */
+  var taps=0,tt,toast=document.getElementById('toast'),th;
+  function egg(){
+    document.body.classList.add('rev'); stage.classList.add('spin');
+    toast.textContent='Ann Wrapped 2026: 3 builds, 2 languages, 1 dealership, 0 free evenings.';
+    toast.classList.add('on'); clearTimeout(th);
+    th=setTimeout(function(){toast.classList.remove('on');document.body.classList.remove('rev');stage.classList.remove('spin');},4200);
+  }
+  document.getElementById('badge').addEventListener('click',function(e){ e.stopPropagation(); taps++; clearTimeout(tt); tt=setTimeout(function(){taps=0;},900); if(taps>=3){taps=0;egg();} });
+
+  /* shutter split opening */
+  var shut=document.getElementById('shut'), over=false, tm1, tm2;
+  function finish(){ if(over)return; over=true; clearTimeout(tm1); clearTimeout(tm2); stage.classList.add('live'); document.body.classList.add('done'); }
+  var seen=false; try{seen=sessionStorage.getItem('aj-wrapped')==='1';}catch(e){}
+  if(rm||seen){ finish(); }
+  else{
+    try{sessionStorage.setItem('aj-wrapped','1');}catch(e){}
+    tm1=setTimeout(function(){ shut.classList.add('go'); stage.classList.add('live'); },650);
+    tm2=setTimeout(finish,1900);
+    document.getElementById('skip').addEventListener('click',finish);
+  }
+})();
+</script>
+</body>
+</html>
